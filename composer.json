@@ -1,0 +1,23 @@
+{
+  "name": "iagafonov/prom-client",
+  "description": "Prometheus client",
+  "version": "1.0",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "IAgafonov",
+      "email": "igoradm90@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "PromClient\\": "src"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "promphp/prometheus_client_php": "^2.4"
+  }
+}
