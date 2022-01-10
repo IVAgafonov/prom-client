@@ -3,6 +3,9 @@
 namespace PromClient\Metrics;
 
 
+use PromClient\Init\PromMetricInit;
+use Prometheus\CollectorRegistry;
+
 class Gauge extends AbstractPrometheus
 {
     /**
@@ -19,7 +22,7 @@ class Gauge extends AbstractPrometheus
         parent::__construct($labels);
         $registry = CollectorRegistry::getDefault();
         $this->gauge = $registry->getOrRegisterGauge(
-            'promonavi',
+            PromMetricInit::$namespace,
             $metric_name.'_gauge',
             '',
             $this->label_names

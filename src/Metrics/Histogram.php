@@ -3,6 +3,9 @@
 namespace PromClient\Metrics;
 
 
+use PromClient\Init\PromMetricInit;
+use Prometheus\CollectorRegistry;
+
 class Histogram extends AbstractPrometheus
 {
 
@@ -21,7 +24,7 @@ class Histogram extends AbstractPrometheus
         parent::__construct($labels);
         $registry = CollectorRegistry::getDefault();
         $this->histogram = $registry->getOrRegisterHistogram(
-            'promonavi',
+            PromMetricInit::$namespace,
             $metric_name.'_histogram',
             '',
             $this->label_names,

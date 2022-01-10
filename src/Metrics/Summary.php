@@ -3,6 +3,9 @@
 namespace PromClient\Metrics;
 
 
+use PromClient\Init\PromMetricInit;
+use Prometheus\CollectorRegistry;
+
 class Summary extends AbstractPrometheus
 {
 
@@ -20,7 +23,7 @@ class Summary extends AbstractPrometheus
         parent::__construct($labels);
         $registry = CollectorRegistry::getDefault();
         $this->summary = $registry->getOrRegisterSummary(
-            'promonavi',
+            PromMetricInit::$namespace,
             $metric_name,
             '',
             $this->label_names,

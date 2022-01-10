@@ -3,6 +3,9 @@
 namespace PromClient\Metrics;
 
 
+use PromClient\Init\PromMetricInit;
+use Prometheus\CollectorRegistry;
+
 class Counter extends AbstractPrometheus
 {
     /**
@@ -19,7 +22,7 @@ class Counter extends AbstractPrometheus
         parent::__construct($labels);
         $registry = CollectorRegistry::getDefault();
         $this->counter = $registry->getOrRegisterCounter(
-            'promonavi',
+            PromMetricInit::$namespace,
             $metric_name.'_counter',
             '',
             $this->label_names

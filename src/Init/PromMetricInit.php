@@ -2,6 +2,8 @@
 
 namespace PromClient\Init;
 
+use Prometheus\Storage\Redis;
+
 class PromMetricInit {
 
     public static string $namespace = 'default';
@@ -14,7 +16,7 @@ class PromMetricInit {
     {
         PromMetricInit::$namespace = $namespace;
 
-        \Prometheus\Storage\Redis::setDefaultOptions(
+        Redis::setDefaultOptions(
             [
                 'host' => $redis_options['host'] ?? 'localhost',
                 'port' => $redis_options['port'] ?? 6379,
