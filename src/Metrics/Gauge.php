@@ -5,6 +5,7 @@ namespace PromClient\Metrics;
 
 use PromClient\Init\PromMetricInit;
 use Prometheus\CollectorRegistry;
+use Prometheus\Storage\APC;
 
 class Gauge extends AbstractPrometheus
 {
@@ -20,7 +21,7 @@ class Gauge extends AbstractPrometheus
     public function __construct(string $metric_name, array $labels)
     {
         parent::__construct($labels);
-        $registry = CollectorRegistry::getDefault();
+        $registry = new CollectorRegistry(new APC());
         $this->gauge = $registry->getOrRegisterGauge(
             PromMetricInit::$namespace,
             $metric_name.'_gauge',

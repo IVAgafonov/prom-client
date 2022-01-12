@@ -5,6 +5,7 @@ namespace PromClient\Metrics;
 
 use PromClient\Init\PromMetricInit;
 use Prometheus\CollectorRegistry;
+use Prometheus\Storage\APC;
 
 class Summary extends AbstractPrometheus
 {
@@ -21,7 +22,7 @@ class Summary extends AbstractPrometheus
     public function __construct(string $metric_name, array $labels)
     {
         parent::__construct($labels);
-        $registry = CollectorRegistry::getDefault();
+        $registry = new CollectorRegistry(new APC());
         $this->summary = $registry->getOrRegisterSummary(
             PromMetricInit::$namespace,
             $metric_name,

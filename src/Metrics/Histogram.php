@@ -5,6 +5,7 @@ namespace PromClient\Metrics;
 
 use PromClient\Init\PromMetricInit;
 use Prometheus\CollectorRegistry;
+use Prometheus\Storage\APC;
 
 class Histogram extends AbstractPrometheus
 {
@@ -22,7 +23,7 @@ class Histogram extends AbstractPrometheus
     public function __construct(string $metric_name, array $values, array $labels)
     {
         parent::__construct($labels);
-        $registry = CollectorRegistry::getDefault();
+        $registry = new CollectorRegistry(new APC());
         $this->histogram = $registry->getOrRegisterHistogram(
             PromMetricInit::$namespace,
             $metric_name.'_histogram',

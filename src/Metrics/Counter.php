@@ -5,6 +5,7 @@ namespace PromClient\Metrics;
 
 use PromClient\Init\PromMetricInit;
 use Prometheus\CollectorRegistry;
+use Prometheus\Storage\APC;
 
 class Counter extends AbstractPrometheus
 {
@@ -20,7 +21,7 @@ class Counter extends AbstractPrometheus
     public function __construct(string $metric_name, array $labels)
     {
         parent::__construct($labels);
-        $registry = CollectorRegistry::getDefault();
+        $registry = new CollectorRegistry(new APC());
         $this->counter = $registry->getOrRegisterCounter(
             PromMetricInit::$namespace,
             $metric_name.'_counter',
